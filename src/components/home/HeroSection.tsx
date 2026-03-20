@@ -1,32 +1,31 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, GraduationCap, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useInView } from "@/hooks/useInView";
+import bcaLogo from "@/assets/bca-logo.png";
 
 export function HeroSection() {
   const { ref, isInView } = useInView();
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 gradient-bg" />
-      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/20 blob float opacity-60" />
-      <div className="absolute bottom-20 left-0 w-80 h-80 bg-secondary/20 blob float opacity-60" style={{ animationDelay: "-3s" }} />
-      <div className="absolute top-1/2 left-1/4 w-40 h-40 bg-accent/30 blob float opacity-40" style={{ animationDelay: "-1.5s" }} />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
+      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/10 blob float opacity-40" />
+      <div className="absolute bottom-20 left-0 w-80 h-80 bg-secondary/10 blob float opacity-40" style={{ animationDelay: "-3s" }} />
+      <div className="absolute top-1/2 left-1/4 w-40 h-40 bg-accent/10 blob float opacity-30" style={{ animationDelay: "-1.5s" }} />
 
       <div className="container-custom relative z-10" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
           <div className="text-center lg:text-left">
             <div
               className={cn(
-                "inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 text-secondary-foreground mb-6 opacity-0",
+                "inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 opacity-0",
                 isInView && "animate-fade-in-up"
               )}
             >
-              <Star className="w-4 h-4 text-accent fill-accent" />
-              <span className="text-sm font-medium">Trusted by 500+ families</span>
+              <GraduationCap className="w-4 h-4" />
+              <span className="text-sm font-medium">Excellence in Education Since 2005</span>
             </div>
 
             <h1
@@ -35,21 +34,11 @@ export function HeroSection() {
                 isInView && "animate-fade-in-up delay-100"
               )}
             >
-              Where Little{" "}
-              <span className="text-primary">Minds</span>{" "}
+              <span className="text-primary">Bright Career</span>{" "}
               <span className="relative inline-block">
-                Bloom
-                <svg
-                  className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 200 12"
-                  fill="none"
-                >
-                  <path
-                    d="M2 8C50 2 150 2 198 8"
-                    stroke="hsl(var(--secondary))"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
+                Academy
+                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
+                  <path d="M2 8C50 2 150 2 198 8" stroke="hsl(var(--secondary))" strokeWidth="4" strokeLinecap="round" />
                 </svg>
               </span>
             </h1>
@@ -60,8 +49,8 @@ export function HeroSection() {
                 isInView && "animate-fade-in-up delay-200"
               )}
             >
-              A nurturing environment where children aged 0-5 years discover, learn, 
-              and grow through play-based education and loving care.
+              Building Futures Through Quality Education. We nurture young minds 
+              with discipline, knowledge, and career guidance for a brighter tomorrow.
             </p>
 
             <div
@@ -73,10 +62,10 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-14 text-lg animate-pulse-glow"
+                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-8 h-14 text-lg animate-pulse-glow"
               >
-                <Link to="/contact">
-                  Schedule a Visit
+                <Link to="/admissions">
+                  Apply Now
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
@@ -84,101 +73,60 @@ export function HeroSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-full px-8 h-14 text-lg border-2"
+                className="rounded-full px-8 h-14 text-lg border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >
-                <Link to="/programs">Explore Programs</Link>
+                <Link to="/programs">
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Explore Programs
+                </Link>
               </Button>
             </div>
 
-            {/* Trust badges */}
             <div
               className={cn(
-                "flex items-center gap-6 mt-10 justify-center lg:justify-start opacity-0",
+                "flex items-center gap-8 mt-10 justify-center lg:justify-start opacity-0",
                 isInView && "animate-fade-in-up delay-400"
               )}
             >
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 rounded-full bg-muted border-2 border-card flex items-center justify-center text-xs font-medium"
-                  >
-                    👶
-                  </div>
-                ))}
-              </div>
-              <div className="text-left">
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} className="w-4 h-4 text-accent fill-accent" />
-                  ))}
+              {[
+                { value: "1000+", label: "Students" },
+                { value: "50+", label: "Teachers" },
+                { value: "98%", label: "Pass Rate" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="text-2xl font-heading font-bold text-primary">{stat.value}</div>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  4.9/5 from 200+ reviews
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Hero Image */}
-          <div
-            className={cn(
-              "relative opacity-0",
-              isInView && "animate-fade-in delay-200"
-            )}
-          >
+          <div className={cn("relative opacity-0", isInView && "animate-fade-in delay-200")}>
             <div className="relative">
-              {/* Main image placeholder */}
-              <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 overflow-hidden shadow-card">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="text-8xl mb-4">👨‍👩‍👧‍👦</div>
-                    <p className="text-muted-foreground font-medium">
-                      Happy children playing
-                    </p>
-                  </div>
-                </div>
+              <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 overflow-hidden shadow-card flex items-center justify-center">
+                <img src={bcaLogo} alt="Bright Career Academy" className="w-64 h-64 object-contain float" />
               </div>
 
-              {/* Floating cards */}
               <div className="absolute -top-4 -left-4 bg-card rounded-2xl p-4 shadow-card float">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-2xl">
-                    🎨
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <GraduationCap className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-heading font-bold text-foreground">Creative</p>
-                    <p className="text-sm text-muted-foreground">Activities</p>
+                    <p className="font-heading font-bold text-foreground">Academic</p>
+                    <p className="text-sm text-muted-foreground">Excellence</p>
                   </div>
                 </div>
               </div>
 
-              <div
-                className="absolute -bottom-4 -right-4 bg-card rounded-2xl p-4 shadow-card float"
-                style={{ animationDelay: "-2s" }}
-              >
+              <div className="absolute -bottom-4 -right-4 bg-card rounded-2xl p-4 shadow-card float" style={{ animationDelay: "-2s" }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-2xl">
-                    📚
+                  <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <p className="font-heading font-bold text-foreground">Early</p>
+                    <p className="font-heading font-bold text-foreground">Modern</p>
                     <p className="text-sm text-muted-foreground">Learning</p>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="absolute top-1/2 -right-8 bg-card rounded-2xl p-4 shadow-card float hidden lg:block"
-                style={{ animationDelay: "-4s" }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-peach flex items-center justify-center text-2xl">
-                    ❤️
-                  </div>
-                  <div>
-                    <p className="font-heading font-bold text-foreground">Loving</p>
-                    <p className="text-sm text-muted-foreground">Care</p>
                   </div>
                 </div>
               </div>

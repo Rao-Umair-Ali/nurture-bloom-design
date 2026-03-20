@@ -1,122 +1,108 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Dr. Sofia's Daycare Design System
-   Brand colors: Orange (#f68121), Golden Yellow (#f9a61a), Dark Blue-Gray (#233241, #2c3e50)
+/* Bright Career Academy Design System
+   Brand colors: Deep Blue (#1E2A78), Red (#E53935), White/Light Gray
    All colors in HSL format
 */
 
 @layer base {
   :root {
-    /* Primary - Vibrant Orange */
-    --primary: 27 93% 55%;
+    /* Primary - Deep Blue */
+    --primary: 232 60% 29%;
     --primary-foreground: 0 0% 100%;
     
-    /* Secondary - Golden Yellow */
-    --secondary: 39 95% 54%;
-    --secondary-foreground: 212 30% 20%;
+    /* Secondary - Red */
+    --secondary: 1 76% 55%;
+    --secondary-foreground: 0 0% 100%;
     
-    /* Accent - Lighter Orange */
-    --accent: 27 93% 65%;
-    --accent-foreground: 212 30% 20%;
-    
-    /* Dark colors for text/backgrounds */
-    --slate: 210 29% 24%;
-    --slate-foreground: 0 0% 100%;
-    
-    /* Navy accent */
-    --navy: 212 30% 20%;
-    --navy-foreground: 0 0% 100%;
+    /* Accent - Lighter Blue */
+    --accent: 232 50% 45%;
+    --accent-foreground: 0 0% 100%;
 
     /* Background & Foreground */
-    --background: 40 33% 98%;
-    --foreground: 212 30% 20%;
+    --background: 220 20% 97%;
+    --foreground: 232 60% 15%;
 
     /* Cards */
     --card: 0 0% 100%;
-    --card-foreground: 212 30% 20%;
+    --card-foreground: 232 60% 15%;
 
     /* Popover */
     --popover: 0 0% 100%;
-    --popover-foreground: 212 30% 20%;
+    --popover-foreground: 232 60% 15%;
 
     /* Muted */
-    --muted: 210 20% 94%;
-    --muted-foreground: 210 15% 45%;
+    --muted: 220 15% 93%;
+    --muted-foreground: 220 10% 45%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Border & Input */
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 27 93% 55%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 232 60% 29%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 212 30% 20%;
-    --sidebar-primary: 27 93% 55%;
+    --sidebar-foreground: 232 60% 15%;
+    --sidebar-primary: 232 60% 29%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 39 95% 90%;
-    --sidebar-accent-foreground: 212 30% 20%;
+    --sidebar-accent: 232 50% 93%;
+    --sidebar-accent-foreground: 232 60% 15%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 27 93% 55%;
+    --sidebar-ring: 232 60% 29%;
 
     /* Custom shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(27 93% 55% / 0.2);
-    --shadow-card: 0 8px 30px -8px hsl(212 30% 20% / 0.08);
-    --shadow-glow: 0 0 40px hsl(27 93% 55% / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(232 60% 29% / 0.12);
+    --shadow-card: 0 8px 30px -8px hsl(232 60% 15% / 0.08);
+    --shadow-glow: 0 0 40px hsl(232 60% 29% / 0.2);
   }
 
   .dark {
-    --primary: 27 93% 55%;
+    --primary: 232 60% 45%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 39 95% 54%;
+    --secondary: 1 76% 55%;
     --secondary-foreground: 0 0% 100%;
     
-    --accent: 27 93% 65%;
-    --accent-foreground: 212 30% 20%;
-    
-    --slate: 210 29% 30%;
-    --slate-foreground: 0 0% 100%;
-    
-    --navy: 212 30% 25%;
-    --navy-foreground: 0 0% 100%;
+    --accent: 232 50% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --background: 212 30% 10%;
-    --foreground: 210 40% 98%;
+    --background: 232 30% 8%;
+    --foreground: 220 20% 95%;
 
-    --card: 212 30% 14%;
-    --card-foreground: 210 40% 98%;
+    --card: 232 30% 12%;
+    --card-foreground: 220 20% 95%;
 
-    --popover: 212 30% 14%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 232 30% 12%;
+    --popover-foreground: 220 20% 95%;
 
-    --muted: 212 25% 20%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 232 20% 18%;
+    --muted-foreground: 220 15% 60%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 212 25% 20%;
-    --input: 212 25% 20%;
-    --ring: 27 93% 55%;
+    --border: 232 20% 20%;
+    --input: 232 20% 20%;
+    --ring: 232 60% 45%;
 
-    --sidebar-background: 212 30% 12%;
+    --sidebar-background: 232 30% 10%;
     --sidebar-foreground: 240 5% 96%;
-    --sidebar-primary: 27 93% 55%;
+    --sidebar-primary: 232 60% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 212 30% 18%;
+    --sidebar-accent: 232 30% 16%;
     --sidebar-accent-foreground: 240 5% 96%;
-    --sidebar-border: 212 30% 18%;
-    --sidebar-ring: 27 93% 55%;
+    --sidebar-border: 232 30% 16%;
+    --sidebar-ring: 232 60% 45%;
   }
 }
 
@@ -135,28 +121,24 @@
 }
 
 @layer components {
-  /* Animated gradient background */
   .gradient-bg {
     background: linear-gradient(
       135deg,
-      hsl(var(--primary) / 0.1) 0%,
-      hsl(var(--secondary) / 0.1) 50%,
-      hsl(var(--accent) / 0.1) 100%
+      hsl(var(--primary) / 0.05) 0%,
+      hsl(var(--secondary) / 0.05) 50%,
+      hsl(var(--accent) / 0.05) 100%
     );
   }
 
-  /* Soft blob shapes */
   .blob {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     animation: blob-morph 8s ease-in-out infinite;
   }
 
-  /* Floating animation */
   .float {
     animation: float 6s ease-in-out infinite;
   }
 
-  /* Card hover effect */
   .card-hover {
     @apply transition-all duration-300 ease-out;
   }
@@ -166,12 +148,10 @@
     box-shadow: var(--shadow-card);
   }
 
-  /* Glow effect */
   .glow {
     box-shadow: var(--shadow-glow);
   }
 
-  /* Underline animation for links */
   .link-underline {
     @apply relative;
   }
@@ -185,19 +165,16 @@
     @apply scale-x-100 origin-bottom-left;
   }
 
-  /* Section spacing */
   .section-padding {
     @apply py-16 md:py-24 lg:py-32;
   }
 
-  /* Container */
   .container-custom {
     @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
 }
 
 @layer utilities {
-  /* Stagger delays */
   .delay-100 { animation-delay: 100ms; }
   .delay-200 { animation-delay: 200ms; }
   .delay-300 { animation-delay: 300ms; }
@@ -208,31 +185,20 @@
   .delay-800 { animation-delay: 800ms; }
 }
 
-/* Keyframes */
 @keyframes blob-morph {
-  0%, 100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  50% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }

@@ -5,21 +5,21 @@ import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 
-const categories = ["All", "Classrooms", "Activities", "Outdoor", "Events"];
+const categories = ["All", "Classrooms", "Labs", "Sports", "Events", "Campus"];
 
 const images = [
-  { id: 1, category: "Classrooms", emoji: "🎨", label: "Art Room" },
-  { id: 2, category: "Activities", emoji: "📚", label: "Story Time" },
-  { id: 3, category: "Outdoor", emoji: "🌳", label: "Playground" },
-  { id: 4, category: "Classrooms", emoji: "🧩", label: "Learning Center" },
-  { id: 5, category: "Events", emoji: "🎉", label: "Birthday Party" },
-  { id: 6, category: "Activities", emoji: "🎵", label: "Music Class" },
-  { id: 7, category: "Outdoor", emoji: "🌻", label: "Garden" },
-  { id: 8, category: "Classrooms", emoji: "🛏️", label: "Nap Room" },
-  { id: 9, category: "Events", emoji: "🎃", label: "Halloween" },
-  { id: 10, category: "Activities", emoji: "🧪", label: "Science Fun" },
-  { id: 11, category: "Outdoor", emoji: "⚽", label: "Sports" },
-  { id: 12, category: "Events", emoji: "🎄", label: "Holiday Show" },
+  { id: 1, category: "Classrooms", emoji: "📚", label: "Smart Classroom" },
+  { id: 2, category: "Labs", emoji: "🔬", label: "Science Lab" },
+  { id: 3, category: "Sports", emoji: "🏏", label: "Cricket Ground" },
+  { id: 4, category: "Classrooms", emoji: "💻", label: "Computer Lab" },
+  { id: 5, category: "Events", emoji: "🎓", label: "Annual Day" },
+  { id: 6, category: "Labs", emoji: "🧪", label: "Chemistry Lab" },
+  { id: 7, category: "Campus", emoji: "🏫", label: "Main Building" },
+  { id: 8, category: "Events", emoji: "🏆", label: "Prize Distribution" },
+  { id: 9, category: "Sports", emoji: "⚽", label: "Sports Day" },
+  { id: 10, category: "Campus", emoji: "📖", label: "Library" },
+  { id: 11, category: "Events", emoji: "🎤", label: "Debate Competition" },
+  { id: 12, category: "Campus", emoji: "🌳", label: "School Garden" },
 ];
 
 export default function Gallery() {
@@ -27,19 +27,13 @@ export default function Gallery() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const { ref, isInView } = useInView();
 
-  const filteredImages = activeCategory === "All" 
-    ? images 
-    : images.filter((img) => img.category === activeCategory);
+  const filteredImages = activeCategory === "All" ? images : images.filter((img) => img.category === activeCategory);
 
   return (
     <Layout>
       <section className="pt-32 pb-16 gradient-bg">
         <div className="container-custom">
-          <SectionHeading
-            badge="Gallery"
-            title="A Glimpse Into Our World"
-            description="See the joy, learning, and fun that happens every day at Dr. Sofia's Daycare."
-          />
+          <SectionHeading badge="Gallery" title="Campus Life at BCA" description="Take a glimpse into our vibrant campus, modern facilities, and exciting school events." />
         </div>
       </section>
 
@@ -52,9 +46,7 @@ export default function Gallery() {
                 onClick={() => setActiveCategory(category)}
                 className={cn(
                   "px-5 py-2 rounded-full font-medium transition-all",
-                  activeCategory === category
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted hover:bg-muted/80 text-foreground"
+                  activeCategory === category ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80 text-foreground"
                 )}
               >
                 {category}
@@ -68,7 +60,7 @@ export default function Gallery() {
                 key={image.id}
                 onClick={() => setLightbox(image.id)}
                 className={cn(
-                  "aspect-square rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 cursor-pointer overflow-hidden shadow-soft card-hover opacity-0 flex items-center justify-center",
+                  "aspect-square rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 cursor-pointer overflow-hidden shadow-soft card-hover border border-border opacity-0 flex items-center justify-center",
                   isInView && `animate-fade-in-up delay-${((index % 4) + 1) * 100}`
                 )}
               >
@@ -82,25 +74,14 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Lightbox */}
       {lightbox && (
-        <div
-          className="fixed inset-0 z-50 bg-foreground/90 flex items-center justify-center p-4"
-          onClick={() => setLightbox(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-background hover:text-primary"
-            onClick={() => setLightbox(null)}
-          >
+        <div className="fixed inset-0 z-50 bg-foreground/90 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
+          <button className="absolute top-4 right-4 text-background hover:text-secondary" onClick={() => setLightbox(null)}>
             <X className="w-8 h-8" />
           </button>
           <div className="bg-card rounded-3xl p-12 max-w-lg w-full text-center">
-            <div className="text-9xl mb-4">
-              {images.find((i) => i.id === lightbox)?.emoji}
-            </div>
-            <p className="text-xl font-heading font-bold">
-              {images.find((i) => i.id === lightbox)?.label}
-            </p>
+            <div className="text-9xl mb-4">{images.find((i) => i.id === lightbox)?.emoji}</div>
+            <p className="text-xl font-heading font-bold">{images.find((i) => i.id === lightbox)?.label}</p>
           </div>
         </div>
       )}

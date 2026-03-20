@@ -19,8 +19,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Nunito", "sans-serif"],
-        body: ["Quicksand", "sans-serif"],
+        heading: ["Poppins", "sans-serif"],
+        body: ["Inter", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -47,14 +47,6 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
-        },
-        slate: {
-          DEFAULT: "hsl(var(--slate))",
-          foreground: "hsl(var(--slate-foreground))",
-        },
-        navy: {
-          DEFAULT: "hsl(var(--navy))",
-          foreground: "hsl(var(--navy-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
