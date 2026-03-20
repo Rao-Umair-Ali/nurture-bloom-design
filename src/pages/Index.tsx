@@ -6,6 +6,7 @@ import {
   TestimonialsCarousel,
   CTASection,
 } from "@/components/home";
+import { WhyChooseUsPreview } from "@/components/home/WhyChooseUsPreview";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <HeroSection />
       <StatsSection />
       <ProgramsPreview />
+      <WhyChooseUsPreview />
       <TestimonialsCarousel />
       <CTASection />
     </Layout>

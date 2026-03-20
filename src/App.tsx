@@ -9,6 +9,7 @@ import Programs from "./pages/Programs";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import Gallery from "./pages/Gallery";
 import Testimonials from "./pages/Testimonials";
+import Admissions from "./pages/Admissions";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/why-choose-us" element={<WhyChooseUs />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/admissions" element={<Admissions />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

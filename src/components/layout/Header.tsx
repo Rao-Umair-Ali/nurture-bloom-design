@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import bcaLogo from "@/assets/bca-logo.png";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
+  { name: "About", path: "/about" },
   { name: "Programs", path: "/programs" },
   { name: "Why Choose Us", path: "/why-choose-us" },
   { name: "Gallery", path: "/gallery" },
   { name: "Testimonials", path: "/testimonials" },
+  { name: "Admissions", path: "/admissions" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -20,16 +22,12 @@ export function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
+  useEffect(() => setIsOpen(false), [location.pathname]);
 
   return (
     <header
@@ -42,28 +40,19 @@ export function Header() {
     >
       <div className="container-custom">
         <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center gap-2 group"
-          >
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center transition-transform group-hover:scale-110">
-              <span className="text-primary-foreground font-heading font-bold text-xl">
-                DS
-              </span>
-            </div>
+          <Link to="/" className="flex items-center gap-2 group">
+            <img src={bcaLogo} alt="BCA Logo" className="w-12 h-12 rounded-full object-contain transition-transform group-hover:scale-110" />
             <div className="hidden sm:block">
-              <h1 className="font-heading font-bold text-lg text-foreground leading-tight">
-                Dr. Sofia's
+              <h1 className="font-heading font-bold text-base text-foreground leading-tight">
+                Bright Career Academy
               </h1>
               <p className="text-xs text-muted-foreground -mt-0.5">
-                Daycare & Learning Center
+                Building Futures Through Education
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden xl:flex items-center gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -80,38 +69,31 @@ export function Header() {
             ))}
           </div>
 
-          {/* CTA & Mobile Menu Button */}
           <div className="flex items-center gap-3">
             <Button
               asChild
-              className="hidden sm:flex bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6"
+              className="hidden sm:flex bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-6"
             >
-              <Link to="/contact">
-                <Phone className="w-4 h-4 mr-2" />
-                Schedule a Visit
+              <Link to="/admissions">
+                <GraduationCap className="w-4 h-4 mr-2" />
+                Apply Now
               </Link>
             </Button>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+              className="xl:hidden p-2 rounded-lg hover:bg-muted transition-colors"
               aria-label="Toggle menu"
             >
-              {isOpen ? (
-                <X className="w-6 h-6 text-foreground" />
-              ) : (
-                <Menu className="w-6 h-6 text-foreground" />
-              )}
+              {isOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
             </button>
           </div>
         </nav>
 
-        {/* Mobile Navigation */}
         <div
           className={cn(
-            "lg:hidden overflow-hidden transition-all duration-300",
-            isOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
+            "xl:hidden overflow-hidden transition-all duration-300",
+            isOpen ? "max-h-[500px] opacity-100 mt-4" : "max-h-0 opacity-0"
           )}
         >
           <div className="bg-card rounded-2xl p-4 shadow-card space-y-1">
@@ -129,13 +111,10 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button
-              asChild
-              className="w-full mt-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
-            >
-              <Link to="/contact">
-                <Phone className="w-4 h-4 mr-2" />
-                Schedule a Visit
+            <Button asChild className="w-full mt-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full">
+              <Link to="/admissions">
+                <GraduationCap className="w-4 h-4 mr-2" />
+                Apply Now
               </Link>
             </Button>
           </div>
