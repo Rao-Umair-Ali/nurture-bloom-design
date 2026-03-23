@@ -152,6 +152,7 @@ export default {
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         wiggle: "wiggle 0.5s ease-in-out infinite",
         bounce: "bounce 1s ease-in-out infinite",
+        marquee: "marquee 20s linear infinite",
       },
     },
   },
