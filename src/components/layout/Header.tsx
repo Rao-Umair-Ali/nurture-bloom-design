@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useSettings } from "@/hooks/useCMS";
 import bcaLogo from "@/assets/bca-logo.png";
 
 const navItems = [
@@ -20,6 +21,9 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { data: settings } = useSettings();
+
+  const showAdmissionBtn = settings?.show_admission_button !== false;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -44,7 +48,7 @@ export function Header() {
             <img src={bcaLogo} alt="BCA Logo" className="w-12 h-12 rounded-full object-contain transition-transform group-hover:scale-110" />
             <div className="hidden sm:block">
               <h1 className="font-heading font-bold text-base text-foreground leading-tight">
-                Bright Career Academy
+                {settings?.site_name || "Bright Career Academy"}
               </h1>
               <p className="text-xs text-muted-foreground -mt-0.5">
                 Building Futures Through Education
@@ -70,15 +74,17 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Button
-              asChild
-              className="hidden sm:flex bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-6"
-            >
-              <Link to="/admissions">
-                <GraduationCap className="w-4 h-4 mr-2" />
-                Apply Now
-              </Link>
-            </Button>
+            {showAdmissionBtn && (
+              <Button
+                asChild
+                className="hidden sm:flex bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-6"
+              >
+                <Link to="/admissions">
+                  <GraduationCap className="w-4 h-4 mr-2" />
+                  Apply Now
+                </Link>
+              </Button>
+            )}
 
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -111,12 +117,14 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button asChild className="w-full mt-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full">
-              <Link to="/admissions">
-                <GraduationCap className="w-4 h-4 mr-2" />
-                Apply Now
-              </Link>
-            </Button>
+            {showAdmissionBtn && (
+              <Button asChild className="w-full mt-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full">
+                <Link to="/admissions">
+                  <GraduationCap className="w-4 h-4 mr-2" />
+                  Apply Now
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>
