@@ -1,39 +1,21 @@
 import { Link } from "react-router-dom";
 import { BookOpen, GraduationCap, Award, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useInView } from "@/hooks/useInView";
+import { usePrograms } from "@/hooks/useCMS";
 import { cn } from "@/lib/utils";
 
-const programs = [
-  {
-    id: "primary",
-    title: "Primary Section",
-    grades: "Grade 1 - 5",
-    icon: BookOpen,
-    description: "Building strong foundations in literacy, numeracy, and critical thinking through engaging and interactive learning methods.",
-    features: ["Interactive classrooms", "Activity-based learning", "Strong foundation building"],
-  },
-  {
-    id: "secondary",
-    title: "Secondary Section",
-    grades: "Grade 6 - 8",
-    icon: GraduationCap,
-    description: "Advancing academic skills with a focus on science, mathematics, and language arts to prepare for higher education.",
-    features: ["Science laboratories", "Computer education", "Sports & co-curricular"],
-  },
-  {
-    id: "matric",
-    title: "Matric Section",
-    grades: "Grade 9 - 10",
-    icon: Award,
-    description: "Comprehensive board exam preparation with expert faculty, career guidance, and competitive exam coaching.",
-    features: ["Board exam preparation", "Career counseling", "Competitive exam coaching"],
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  BookOpen,
+  GraduationCap,
+  Award,
+};
 
 export function ProgramsPreview() {
   const { ref, isInView } = useInView();
+  const { data: programs, loading } = usePrograms();
 
   return (
     <section className="section-padding">
@@ -45,45 +27,61 @@ export function ProgramsPreview() {
         />
 
         <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-          {programs.map((program, index) => {
-            const Icon = program.icon;
-            return (
-              <div
-                key={program.id}
-                className={cn(
-                  "group bg-card rounded-3xl p-8 shadow-soft card-hover opacity-0 border border-border",
-                  isInView && `animate-fade-in-up delay-${(index + 1) * 100}`
-                )}
-              >
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 transition-transform group-hover:scale-110">
-                  <Icon className="w-8 h-8 text-primary" />
-                </div>
-
-                <div className="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-3">
-                  {program.grades}
-                </div>
-
-                <h3 className="text-2xl font-heading font-bold text-foreground mb-3">{program.title}</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">{program.description}</p>
-
-                <ul className="space-y-2 mb-6">
-                  {program.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm text-foreground">
-                      <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  to={`/programs#${program.id}`}
-                  className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all"
-                >
-                  Learn More <ArrowRight className="w-4 h-4" />
-                </Link>
+          {loading ? (
+            Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="bg-card rounded-3xl p-8 border border-border">
+                <Skeleton className="w-16 h-16 rounded-2xl mb-6" />
+                <Skeleton className="h-6 w-24 mb-3" />
+                <Skeleton className="h-8 w-48 mb-3" />
+                <Skeleton className="h-20 w-full mb-6" />
               </div>
-            );
-          })}
+            ))
+          ) : (
+            programs.map((program, index) => {
+              const Icon = iconMap[program.icon || "BookOpen"] || BookOpen;
+              const features = Array.isArray(program.features) ? program.features as string[] : [];
+              return (
+                <div
+                  key={program.id}
+                  className={cn(
+                    "group bg-card rounded-3xl p-8 shadow-soft card-hover opacity-0 border border-border",
+                    isInView && `animate-fade-in-up delay-${(index + 1) * 100}`
+                  )}
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 transition-transform group-hover:scale-110">
+                    <Icon className="w-8 h-8 text-primary" />
+                  </div>
+
+                  {program.age_range && (
+                    <div className="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-3">
+                      {program.age_range}
+                    </div>
+                  )}
+
+                  <h3 className="text-2xl font-heading font-bold text-foreground mb-3">{program.title}</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">{program.description}</p>
+
+                  {features.length > 0 && (
+                    <ul className="space-y-2 mb-6">
+                      {features.slice(0, 3).map((feature) => (
+                        <li key={String(feature)} className="flex items-center gap-2 text-sm text-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                          {String(feature)}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  <Link
+                    to="/programs"
+                    className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all"
+                  >
+                    Learn More <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              );
+            })
+          )}
         </div>
 
         <div className="text-center mt-12">
