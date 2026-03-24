@@ -37,7 +37,7 @@ export function AnnouncementPopup() {
 
   const handleClose = () => {
     setIsVisible(false);
-    localStorage.setItem(POPUP_STORAGE_KEY, announcement.id);
+    sessionStorage.setItem(POPUP_STORAGE_KEY, announcement.id);
   };
 
   return (
