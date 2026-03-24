@@ -11,7 +11,7 @@ export function NewsBar() {
   const marqueeText = announcements.map((a) => a.title).join("  •  ");
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-secondary text-secondary-foreground py-1.5 overflow-hidden">
+    <div className="relative z-[60] bg-secondary text-secondary-foreground py-1.5 overflow-hidden flex-shrink-0">
       <div className="flex items-center">
         <div className="flex-1 overflow-hidden group">
           <div className="animate-marquee whitespace-nowrap group-hover:[animation-play-state:paused]">

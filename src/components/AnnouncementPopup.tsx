@@ -17,10 +17,21 @@ export function AnnouncementPopup() {
     const dismissed = localStorage.getItem(POPUP_STORAGE_KEY);
     if (dismissed === announcement.id) return;
 
-    // Small delay for smooth entrance
     const timer = setTimeout(() => setIsVisible(true), 1000);
     return () => clearTimeout(timer);
   }, [announcement, loading]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isVisible]);
 
   if (!announcement || !isVisible) return null;
 
@@ -30,18 +41,24 @@ export function AnnouncementPopup() {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+    >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-foreground/50 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-foreground/60 backdrop-blur-sm transition-opacity duration-300"
         onClick={handleClose}
       />
 
       {/* Modal */}
-      <div className={cn(
-        "relative bg-card rounded-3xl p-8 md:p-10 max-w-md w-full shadow-2xl border border-border",
-        "animate-scale-in"
-      )}>
+      <div
+        className={cn(
+          "relative bg-card rounded-3xl p-8 md:p-10 max-w-md w-full shadow-2xl border border-border",
+          "animate-scale-in"
+        )}
+      >
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 w-8 h-8 rounded-full bg-muted hover:bg-muted-foreground/20 flex items-center justify-center transition-colors"
