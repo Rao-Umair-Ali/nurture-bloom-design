@@ -31,18 +31,19 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
-      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/10 blob float opacity-40" />
-      <div className="absolute bottom-20 left-0 w-80 h-80 bg-secondary/10 blob float opacity-40" style={{ animationDelay: "-3s" }} />
-      <div className="absolute top-1/2 left-1/4 w-40 h-40 bg-accent/10 blob float opacity-30" style={{ animationDelay: "-1.5s" }} />
+      {/* Reduced blob count and use will-change for GPU compositing */}
+      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/10 blob float opacity-40 will-change-transform" />
+      <div className="absolute bottom-20 left-0 w-80 h-80 bg-secondary/10 blob float opacity-40 will-change-transform" style={{ animationDelay: "-3s" }} />
 
       <div className="container-custom relative z-10" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             {loading ? (
               <div className="space-y-4">
-                <Skeleton className="h-8 w-64 mx-auto lg:mx-0" />
-                <Skeleton className="h-16 w-full" />
-                <Skeleton className="h-24 w-full" />
+                {/* Reserve exact space to prevent CLS */}
+                <div className="h-8 w-64 mx-auto lg:mx-0"><Skeleton className="h-full w-full" /></div>
+                <div className="h-16 w-full"><Skeleton className="h-full w-full" /></div>
+                <div className="h-24 w-full"><Skeleton className="h-full w-full" /></div>
               </div>
             ) : (
               <>
@@ -55,7 +56,7 @@ export function HeroSection() {
                   <span className="text-primary">{heading1}</span>{" "}
                   <span className="relative inline-block">
                     {heading2}
-                    <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
+                    <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none" aria-hidden="true" width="200" height="12">
                       <path d="M2 8C50 2 150 2 198 8" stroke="hsl(var(--secondary))" strokeWidth="4" strokeLinecap="round" />
                     </svg>
                   </span>
@@ -100,10 +101,18 @@ export function HeroSection() {
 
           <div className={cn("relative opacity-0", isInView && "animate-fade-in delay-200")}>
             <div className="relative">
+              {/* Explicit dimensions for CLS prevention */}
               <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 overflow-hidden shadow-card flex items-center justify-center">
-                <img src={bcaLogo} alt="Bright Career Academy" className="w-64 h-64 object-contain float" />
+                <img
+                  src={bcaLogo}
+                  alt="Bright Career Academy"
+                  className="w-64 h-64 object-contain float"
+                  width={256}
+                  height={256}
+                  fetchPriority="high"
+                />
               </div>
-              <div className="absolute -top-4 -left-4 bg-card rounded-2xl p-4 shadow-card float">
+              <div className="absolute -top-4 -left-4 bg-card rounded-2xl p-4 shadow-card float will-change-transform">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                     <GraduationCap className="w-6 h-6 text-primary" />
@@ -114,7 +123,7 @@ export function HeroSection() {
                   </div>
                 </div>
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-card rounded-2xl p-4 shadow-card float" style={{ animationDelay: "-2s" }}>
+              <div className="absolute -bottom-4 -right-4 bg-card rounded-2xl p-4 shadow-card float will-change-transform" style={{ animationDelay: "-2s" }}>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
                     <BookOpen className="w-6 h-6 text-secondary" />
