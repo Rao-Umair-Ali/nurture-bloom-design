@@ -14,7 +14,7 @@ export function AnnouncementPopup() {
   useEffect(() => {
     if (loading || !announcement) return;
 
-    const dismissed = localStorage.getItem(POPUP_STORAGE_KEY);
+    const dismissed = sessionStorage.getItem(POPUP_STORAGE_KEY);
     if (dismissed === announcement.id) return;
 
     const timer = setTimeout(() => setIsVisible(true), 1000);
@@ -37,7 +37,7 @@ export function AnnouncementPopup() {
 
   const handleClose = () => {
     setIsVisible(false);
-    localStorage.setItem(POPUP_STORAGE_KEY, announcement.id);
+    sessionStorage.setItem(POPUP_STORAGE_KEY, announcement.id);
   };
 
   return (
