@@ -10,6 +10,18 @@
     <meta property="og:description" content="Building Futures Through Quality Education. Enroll now at Bright Career Academy." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="/src/assets/bca-logo.png" fetchpriority="high" />
+
+    <!-- Load fonts with display=swap, defer non-critical weights -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" /></noscript>
   </head>
   <body>
     <div id="root"></div>
